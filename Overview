@@ -1,273 +1,92 @@
-# Demand Forecasting & Inventory Optimization Dashboard
 
-This project builds a **machine learning based demand forecasting and inventory optimization system** using the **Sample Superstore Dataset**.
-
-The system predicts **future product demand**, calculates **optimal order quantity**, determines **reorder point**, and estimates the **risk of stockout** using machine learning models.
-
-A **Streamlit dashboard** is used to interact with the models and visualize the results.
-
----
-
-# Project Objective
-
-The goal of this project is to combine **machine learning** and **inventory management techniques** to help businesses:
-
-* Forecast product demand
-* Avoid stockouts
-* Reduce holding and ordering costs
-* Improve inventory planning
-
----
-
-# Technologies Used
-
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* Streamlit
-* Joblib
-
----
-
-# Dataset
-
-Dataset used: **Sample Superstore Dataset**
-
-Important columns used:
-
-* Sub-Category
-* Sales
-* Quantity
-* Discount
-
-Additional features created during preprocessing:
-
-* Month
-* Unit Price
-* Current Stock
-* Stockout Indicator
-
----
-
-# Project Structure
-
-```
-Demand-Forecasting-Inventory-Optimization
-│
-├── data
-│   └── SampleSuperstore.csv
-│
-├── models
-│   ├── demand_model.pkl
-│   └── stockout_model.pkl
-│
-├── training
-│   ├── train_demand_model.py
-│   └── train_stockout_model.py
-│
-├── dashboard
-│   └── app.py
-│
-├── requirements.txt
-└── README.md
-```
-
----
-
-# System Workflow
-
-The system follows this pipeline:
-
-```
-User Input
-   ↓
-Demand Forecast Model
-   ↓
-Predicted Monthly Demand
-   ↓
-Annual Demand Calculation
-   ↓
-Economic Order Quantity (EOQ)
-   ↓
-Reorder Point (ROP)
-   ↓
-Stockout Risk Prediction
-```
-
----
-
-# Inventory Optimization Logic
-
-Economic Order Quantity is calculated using:
-
-EOQ = \sqrt{\frac{2DS}{H}}
-
-Where:
-
-* **D** = Annual demand
-* **S** = Ordering cost
-* **H** = Holding cost
-
----
-
-Reorder Point is calculated using:
-
-ROP = d \times L
-
-Where:
-
-* **d** = Daily demand
-* **L** = Lead time (days)
-
----
-
-# Example Workflow
-
-Example user input:
-
-```
-Month: 6
-Sub Category: Phones
-Unit Price: 450
-Current Stock: 200
-Ordering Cost: 100
-Holding Cost: 5
-Lead Time: 5 days
-```
-
-### Step 1 — Demand Prediction
-
-The demand model predicts:
-
-```
-Predicted Monthly Demand = 275 units
-```
-
----
-
-### Step 2 — Annual Demand
-
-```
-Annual Demand = 275 × 12
-              = 3300 units
-```
-
----
-
-### Step 3 — EOQ Calculation
-
-```
-EOQ ≈ 363 units
-```
-
-Meaning the business should order **about 363 units each time**.
-
----
-
-### Step 4 — Reorder Point
-
-```
-Daily Demand = 275 / 30 ≈ 9 units
-
-ROP = 9 × 5
-ROP = 45 units
-```
-
-Meaning when stock falls to **45 units**, a new order should be placed.
-
----
-
-### Step 5 — Stockout Prediction
-
-The stockout model evaluates:
-
-```
-Predicted Demand vs Current Stock
-```
-
-Output:
-
-```
-Stock Level Safe
-```
-
-or
-
-```
-High Risk of Stockout
-```
-
----
-
-# Running the Project
-
-### 1️⃣ Install dependencies
-
-```
-pip install -r requirements.txt
-```
-
----
-
-### 2️⃣ Train the models
-
-Train demand model:
-
-```
-python training/train_demand_model.py
-```
-
-Train stockout model:
-
-```
-python training/train_stockout_model.py
-```
-
----
-
-### 3️⃣ Run the dashboard
-
-```
-streamlit run dashboard/app.py
-```
-
----
-
-# Dashboard Features
-
-The Streamlit dashboard allows users to:
-
-* Select **Month**
-* Select **Sub Category**
-* Enter **Unit Price**
-* Enter **Current Stock**
-* Enter **Ordering Cost**
-* Enter **Holding Cost**
-* Enter **Lead Time**
-
-The system then displays:
-
-* Predicted Monthly Demand
-* Annual Demand
-* Economic Order Quantity
-* Reorder Point
-* Stockout Risk
-
----
-
-# Future Improvements
-
-Possible improvements for the project:
-
-* Use time-series forecasting models
-* Add demand seasonality analysis
-* Implement safety stock calculation
-* Add interactive visualizations
-* Deploy the dashboard online
-
----
-
-# Author
-
-Vishal Raj
+🚀 Overview
+
+This project focuses on building a data-driven system for predicting product demand and optimizing inventory levels.
+
+Businesses often suffer from overstocking (wasted capital) or stockouts (lost sales). Traditional forecasting methods fail to capture complex demand patterns.
+
+This project uses Machine Learning and Time-Series models to improve prediction accuracy and support smarter inventory decisions.
+
+🎯 Objectives
+Predict future product demand accurately
+Minimize inventory holding and shortage costs
+Automate decision-making using data insights
+Build a scalable solution for real-world businesses
+🛠️ Project Workflow
+1. Data Collection & Preprocessing
+Collected historical sales data
+Merged inventory and product datasets
+Handled missing values and inconsistencies
+Generated a structured dataset for analysis
+2. Demand Forecasting
+Applied feature engineering (lag features, rolling mean)
+Implemented forecasting models:
+Random Forest
+ARIMA
+LSTM
+Evaluated performance using:
+MAE (Mean Absolute Error)
+RMSE (Root Mean Squared Error)
+
+👉 Output: Forecasted Demand
+
+3. Inventory Optimization
+Calculated Economic Order Quantity (EOQ)
+Estimated Safety Stock
+Determined Reorder Point
+
+👉 Goal: Minimize inventory cost while maintaining availability
+👉 Output: Optimal Inventory Levels
+
+4. Performance Evaluation
+Compared Actual vs Predicted Demand
+Evaluated cost efficiency
+Analyzed inventory turnover
+
+👉 Output: Actionable Business Insights
+
+5. Visualization & Deployment
+Built dashboards for:
+Demand forecasting
+Inventory status
+Alerts and insights
+Tools used:
+Streamlit
+Power BI
+
+👉 Output: Decision Support System
+
+📈 Results & Benefits
+✅ Improved demand prediction accuracy
+✅ Reduced inventory costs
+✅ Better stock availability
+✅ Faster and smarter decision-making
+✅ Scalable for different industries
+🌍 Real-World Applications
+Retail & E-commerce
+Manufacturing
+Warehousing & Logistics
+Supply Chain Management
+🧑‍💻 Tech Stack
+Python
+Pandas, NumPy
+Scikit-learn
+Statsmodels (ARIMA)
+TensorFlow / Keras (LSTM)
+Streamlit / Power BI
+
+🧠 Key Learning
+
+This project demonstrates how combining Machine Learning with business logic can solve real-world problems like demand uncertainty and inefficient inventory management.
+
+📌 Future Improvements
+Real-time data integration
+Advanced deep learning models
+Cloud deployment (AWS / Azure)
+Automated alert system
+
+
+
+Author
+
+--- VISHAL RAJ
