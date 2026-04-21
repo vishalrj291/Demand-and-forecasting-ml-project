@@ -131,6 +131,9 @@ This project demonstrates how combining **Machine Learning with business logic**
 
 ---
 
+## Deployment Link
+https://demand-and-forecasting-ui-d76e.vercel.app/
+
 ## 📌 Future Improvements
 
 * Real-time data integration
@@ -143,3 +146,5 @@ This project demonstrates how combining **Machine Learning with business logic**
 ## 👤 Author
 
 **Vishal Raj**
+
+
