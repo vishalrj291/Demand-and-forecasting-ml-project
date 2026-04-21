@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSI Manager — Demand, Supply & Inventory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Cinematic background -->
+  <div class="scene" aria-hidden="true">
+    <div class="scene__grid"></div>
+    <div class="scene__orb scene__orb--1"></div>
+    <div class="scene__orb scene__orb--2"></div>
+    <div class="scene__orb scene__orb--3"></div>
+    <div class="scene__orb scene__orb--4"></div>
+    <div class="scene__noise"></div>
+  </div>
+
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="header" id="top">
+      <div class="header__left">
+        <div class="header__mark">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <rect x="0" y="0" width="8" height="8" rx="2" fill="currentColor"/>
+            <rect x="10" y="0" width="8" height="8" rx="2" fill="currentColor" opacity=".5"/>
+            <rect x="0" y="10" width="8" height="8" rx="2" fill="currentColor" opacity=".5"/>
+            <rect x="10" y="10" width="8" height="8" rx="2" fill="currentColor" opacity=".2"/>
+          </svg>
+        </div>
+        <div class="header__brand">
+          <span class="header__brand-main">DSI</span>
+          <span class="header__brand-sub">Manager</span>
+        </div>
+      </div>
+      <div class="header__center">
+        <h1 class="header__title">Demand, Supply &amp; Inventory</h1>
+        <p class="header__tagline">ML-Powered Analytics</p>
+      </div>
+      <div class="header__right">
+        <div class="status-pill">
+          <span class="status-pill__dot"></span>
+          <span>Models Ready</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- FLOW INDICATOR -->
+    <div class="flow-bar">
+      <div class="flow-step flow-step--active" data-step="1">
+        <span class="flow-step__num">01</span>
+        <span class="flow-step__label">Demand Prediction</span>
+      </div>
+      <div class="flow-arrow">
+        <svg width="20" height="10" viewBox="0 0 20 10"><path d="M0 5h18M13 1l5 4-5 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        <span class="flow-arrow__hint">auto-fills</span>
+      </div>
+      <div class="flow-step" data-step="2">
+        <span class="flow-step__num">02</span>
+        <span class="flow-step__label">EOQ &amp; ROP</span>
+      </div>
+      <div class="flow-arrow">
+        <svg width="20" height="10" viewBox="0 0 20 10"><path d="M0 5h18M13 1l5 4-5 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        <span class="flow-arrow__hint">auto-fills</span>
+      </div>
+      <div class="flow-step" data-step="3">
+        <span class="flow-step__num">03</span>
+        <span class="flow-step__label">Stockout Risk</span>
+      </div>
+    </div>
+
+    <main class="main">
+
+      <!-- ══ CARD 1 — DEMAND PREDICTION ══ -->
+      <section class="card card--demand" id="demand-section">
+        <div class="card__stripe"></div>
+        <div class="card__inner">
+          <div class="card__head">
+            <div class="card__head-left">
+              <div class="chip chip--violet">ML Model</div>
+              <h2 class="card__title">
+                <em>Demand</em> Prediction
+              </h2>
+              <p class="card__desc">Forecast product demand using Linear Regression</p>
+            </div>
+            <div class="card__head-right">
+              <div class="model-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                demand_model.pkl
+              </div>
+            </div>
+          </div>
+
+          <div class="card__body">
+
+            <!-- Row 1: Month + Unit Price -->
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label class="field__label" for="month">
+                  <span class="field__label-text">Month</span>
+                  <span class="field__label-key">feature</span>
+                </label>
+                <div class="select-wrap">
+                  <select class="field__select" id="month">
+                    <option value="" disabled selected>Select month</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                  <svg class="select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <span class="field__error" id="month-error"></span>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="unit-price">
+                  <span class="field__label-text">Unit Price</span>
+                  <span class="field__label-key">feature</span>
+                </label>
+                <div class="input-wrap">
+                  <span class="input-pre">₹</span>
+                  <input class="field__input has-pre" type="number" id="unit-price" placeholder="e.g. 450" min="0" step="0.01" />
+                </div>
+                <span class="field__error" id="unit-price-error"></span>
+              </div>
+            </div>
+
+            <!-- Sub-category selector -->
+            <div class="field">
+              <label class="field__label" for="sub-category">
+                <span class="field__label-text">Product Sub-Category</span>
+                <span class="field__label-key">feature (one-hot encoded)</span>
+              </label>
+              <div class="select-wrap">
+                <select class="field__select" id="sub-category">
+                  <option value="" disabled selected>Select sub-category</option>
+                  <option value="Sub-Category_Accessories">Accessories</option>
+                  <option value="Sub-Category_Appliances">Appliances</option>
+                  <option value="Sub-Category_Art">Art</option>
+                  <option value="Sub-Category_Binders">Binders</option>
+                  <option value="Sub-Category_Bookcases">Bookcases</option>
+                  <option value="Sub-Category_Chairs">Chairs</option>
+                  <option value="Sub-Category_Copiers">Copiers</option>
+                  <option value="Sub-Category_Envelopes">Envelopes</option>
+                  <option value="Sub-Category_Fasteners">Fasteners</option>
+                  <option value="Sub-Category_Furnishings">Furnishings</option>
+                  <option value="Sub-Category_Labels">Labels</option>
+                  <option value="Sub-Category_Machines">Machines</option>
+                  <option value="Sub-Category_Paper">Paper</option>
+                  <option value="Sub-Category_Phones">Phones</option>
+                  <option value="Sub-Category_Storage">Storage</option>
+                  <option value="Sub-Category_Supplies">Supplies</option>
+                  <option value="Sub-Category_Tables">Tables</option>
+                </select>
+                <svg class="select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <span class="field__error" id="sub-category-error"></span>
+            </div>
+
+            <div class="action-row">
+              <button class="btn btn--violet" id="predict-btn" onclick="predictDemand()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16"/></svg>
+                Run Prediction
+              </button>
+            </div>
+
+            <div class="result-panel result-panel--hidden" id="demand-result">
+              <div class="result-panel__inner">
+                <div class="result-panel__label">Predicted Demand</div>
+                <div class="result-panel__value-wrap">
+                  <span class="result-panel__value" id="demand-value">—</span>
+                  <span class="result-panel__unit">units</span>
+                </div>
+                <div class="result-panel__note" id="demand-note">Demand auto-populated into EOQ, ROP &amp; Stockout Risk below ↓</div>
+              </div>
+              <div class="result-panel__pulse"></div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ CARDS 2+3 SIDE BY SIDE ══ -->
+      <div class="twin-grid">
+
+        <!-- ── CARD 2 — EOQ ── -->
+        <section class="card card--emerald" id="eoq-section">
+          <div class="card__stripe"></div>
+          <div class="card__inner">
+            <div class="card__head">
+              <div class="card__head-left">
+                <div class="chip chip--emerald">Formula</div>
+                <h2 class="card__title"><em>EOQ</em> Calculator</h2>
+                <p class="card__desc">Economic Order Quantity</p>
+              </div>
+            </div>
+
+            <div class="formula-tag">
+              <span>√( 2 × D × S / H )</span>
+            </div>
+
+            <div class="card__body">
+              <div class="field">
+                <label class="field__label" for="annual-demand">
+                  <span class="field__label-text">Annual Demand (D)</span>
+                  <span class="field__label-key autofill" id="eoq-autofill-badge">auto-filled ✓</span>
+                </label>
+                <div class="input-wrap">
+                  <input class="field__input" type="number" id="annual-demand" placeholder="From prediction…" min="0" />
+                  <span class="input-suf">units/yr</span>
+                </div>
+                <span class="field__error" id="annual-demand-error"></span>
+              </div>
+
+              <div class="field-grid field-grid--2">
+                <div class="field">
+                  <label class="field__label" for="ordering-cost">
+                    <span class="field__label-text">Ordering Cost (S)</span>
+                  </label>
+                  <div class="input-wrap">
+                    <span class="input-pre">₹</span>
+                    <input class="field__input has-pre" type="number" id="ordering-cost" placeholder="e.g. 200" min="0" step="0.01" />
+                  </div>
+                  <span class="field__error" id="ordering-cost-error"></span>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="holding-cost">
+                    <span class="field__label-text">Holding Cost (H)</span>
+                  </label>
+                  <div class="input-wrap">
+                    <span class="input-pre">₹</span>
+                    <input class="field__input has-pre" type="number" id="holding-cost" placeholder="e.g. 50" min="0" step="0.01" />
+                    <span class="input-suf">/unit/yr</span>
+                  </div>
+                  <span class="field__error" id="holding-cost-error"></span>
+                </div>
+              </div>
+
+              <button class="btn btn--emerald" id="eoq-btn" onclick="calculateEOQ()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Calculate EOQ
+              </button>
+
+              <div class="result-panel result-panel--hidden result-panel--emerald" id="eoq-result">
+                <div class="result-panel__inner">
+                  <div class="result-panel__label">EOQ Result</div>
+                  <div class="result-panel__value-wrap">
+                    <span class="result-panel__value" id="eoq-value">—</span>
+                    <span class="result-panel__unit">units/order</span>
+                  </div>
+                </div>
+                <div class="result-panel__pulse result-panel__pulse--emerald"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── CARD 3 — ROP ── -->
+        <section class="card card--amber" id="rop-section">
+          <div class="card__stripe"></div>
+          <div class="card__inner">
+            <div class="card__head">
+              <div class="card__head-left">
+                <div class="chip chip--amber">Formula</div>
+                <h2 class="card__title"><em>ROP</em> Calculator</h2>
+                <p class="card__desc">Reorder Point Trigger</p>
+              </div>
+            </div>
+
+            <div class="formula-tag formula-tag--amber">
+              <span>(D × LT) + Safety Stock</span>
+            </div>
+
+            <div class="card__body">
+              <div class="field">
+                <label class="field__label" for="avg-daily-demand">
+                  <span class="field__label-text">Avg. Daily Demand</span>
+                  <span class="field__label-key autofill" id="rop-autofill-badge">auto-filled ✓</span>
+                </label>
+                <div class="input-wrap">
+                  <input class="field__input" type="number" id="avg-daily-demand" placeholder="From prediction…" min="0" step="0.1" />
+                  <span class="input-suf">units</span>
+                </div>
+                <span class="field__error" id="avg-daily-demand-error"></span>
+              </div>
+
+              <div class="field-grid field-grid--2">
+                <div class="field">
+                  <label class="field__label" for="lead-time">
+                    <span class="field__label-text">Lead Time</span>
+                  </label>
+                  <div class="input-wrap">
+                    <input class="field__input" type="number" id="lead-time" placeholder="e.g. 7" min="0" />
+                    <span class="input-suf">days</span>
+                  </div>
+                  <span class="field__error" id="lead-time-error"></span>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="safety-stock">
+                    <span class="field__label-text">Safety Stock</span>
+                  </label>
+                  <div class="input-wrap">
+                    <input class="field__input" type="number" id="safety-stock" placeholder="e.g. 100" min="0" />
+                    <span class="input-suf">units</span>
+                  </div>
+                  <span class="field__error" id="safety-stock-error"></span>
+                </div>
+              </div>
+
+              <button class="btn btn--amber" id="rop-btn" onclick="calculateROP()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Calculate ROP
+              </button>
+
+              <div class="result-panel result-panel--hidden result-panel--amber" id="rop-result">
+                <div class="result-panel__inner">
+                  <div class="result-panel__label">Reorder Point</div>
+                  <div class="result-panel__value-wrap">
+                    <span class="result-panel__value" id="rop-value">—</span>
+                    <span class="result-panel__unit">units</span>
+                  </div>
+                </div>
+                <div class="result-panel__pulse result-panel__pulse--amber"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /twin-grid -->
+
+      <!-- ══ CARD 4 — STOCKOUT RISK ══ -->
+      <section class="card card--risk" id="risk-section">
+        <div class="card__stripe"></div>
+        <div class="card__inner">
+          <div class="card__head">
+            <div class="card__head-left">
+              <div class="chip chip--rose">ML Model</div>
+              <h2 class="card__title"><em>Stockout</em> Risk Predictor</h2>
+              <p class="card__desc">Classify inventory risk using Logistic Regression</p>
+            </div>
+            <div class="card__head-right">
+              <div class="model-badge model-badge--rose">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                stockout_model.pkl
+              </div>
+            </div>
+          </div>
+
+          <div class="card__body">
+            <div class="field-grid field-grid--2">
+              <div class="field">
+                <label class="field__label" for="risk-demand">
+                  <span class="field__label-text">Predicted Demand</span>
+                  <span class="field__label-key autofill" id="risk-autofill-badge">auto-filled ✓</span>
+                </label>
+                <div class="input-wrap">
+                  <input class="field__input" type="number" id="risk-demand" placeholder="From prediction…" min="0" />
+                  <span class="input-suf">units</span>
+                </div>
+                <span class="field__error" id="risk-demand-error"></span>
+              </div>
+
+              <div class="field">
+                <label class="field__label" for="inventory-level">
+                  <span class="field__label-text">Current Inventory Level</span>
+                  <span class="field__label-key">manual input</span>
+                </label>
+                <div class="input-wrap">
+                  <input class="field__input" type="number" id="inventory-level" placeholder="e.g. 300" min="0" />
+                  <span class="input-suf">units</span>
+                </div>
+                <span class="field__error" id="inventory-level-error"></span>
+              </div>
+            </div>
+
+            <div class="action-row">
+              <button class="btn btn--rose" id="risk-btn" onclick="predictStockoutRisk()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="10.29 3.86 1.82 18 22.18 18 13.71 3.86 10.29 3.86"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Predict Risk
+              </button>
+            </div>
+
+            <div class="result-panel result-panel--hidden result-panel--risk" id="risk-result">
+              <div class="result-panel__inner">
+                <div class="result-panel__label">Stockout Risk Level</div>
+                <div class="result-panel__value-wrap">
+                  <span class="result-panel__value result-panel__value--risk" id="risk-value">—</span>
+                </div>
+                <div class="risk-meter" id="risk-meter">
+                  <div class="risk-meter__track">
+                    <div class="risk-meter__fill" id="risk-meter-fill"></div>
+                  </div>
+                  <div class="risk-meter__labels">
+                    <span>Low Risk</span>
+                    <span>High Risk</span>
+                  </div>
+                </div>
+                <div class="result-panel__note" id="risk-prob-note"></div>
+              </div>
+              <div class="result-panel__pulse result-panel__pulse--rose"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span class="footer__brand">DSI Manager</span>
+        <span class="footer__sep">·</span>
+        <span>ML-powered supply chain intelligence</span>
+        <span class="footer__sep">·</span>
+        <span>demand_model.pkl &amp; stockout_model.pkl</span>
+      </div>
+    </footer>
+
+  </div><!-- /app -->
+
+  <script src="app.js"></script>
+</body>
+</html>
