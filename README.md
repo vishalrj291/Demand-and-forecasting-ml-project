@@ -1,150 +1,97 @@
-# 📦 Demand Forecasting & Inventory Optimization System
+# Demand Forecasting & Inventory Optimization
 
-## 🚀 Overview
+A clean full-stack machine learning project for portfolio use and deployment:
 
-This project focuses on building a **data-driven system** to predict product demand and optimize inventory levels.
+- `backend/`: FastAPI API ready for Render
+- `frontend/`: Vite + React dashboard ready for Vercel
+- automatic model generation from `SampleSuperstore.csv`
+- GitHub-friendly structure with reproducible training logic
 
-Businesses often struggle with:
+## What This Project Does
 
-* **Overstocking** → wasted capital
-* **Stockouts** → lost sales
+This app helps demonstrate a practical inventory analytics workflow:
 
-Traditional forecasting methods fail to capture complex demand patterns. This project leverages **Machine Learning and Time-Series models** to improve prediction accuracy and enable smarter inventory decisions.
+- predicts monthly demand from month, unit price, and product sub-category
+- calculates EOQ and reorder point
+- predicts stockout risk from predicted demand and current inventory
 
----
+## Project Structure
 
-## 🎯 Objectives
+```text
+.
+|-- backend
+|   |-- app
+|   |-- data
+|   |-- models
+|   `-- requirements.txt
+|-- frontend
+|   |-- src
+|   `-- package.json
+`-- render.yaml
+```
 
-* Predict future product demand accurately
-* Minimize inventory holding and shortage costs
-* Automate decision-making using data insights
-* Build a scalable solution for real-world applications
+## Local Development
 
----
+### Backend
 
-## 🛠️ Project Workflow
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-### 1. Data Collection & Preprocessing
+The API will run at `http://127.0.0.1:8000`. If the model files are missing, they are generated automatically on startup.
 
-* Collected historical sales data
-* Merged inventory and product datasets
-* Handled missing values and inconsistencies
-* Generated a clean, structured dataset
+### Frontend
 
----
+```bash
+cd frontend
+npm install
+copy .env.example .env
+npm run dev
+```
 
-### 2. Demand Forecasting
+Set `VITE_API_BASE_URL` in `frontend/.env` to your backend URL.
 
-* Performed feature engineering:
+## API Endpoints
 
-  * Lag features
-  * Rolling mean
+- `GET /api/health`
+- `POST /api/predict/demand`
+- `POST /api/calculate/inventory`
+- `POST /api/predict/risk`
 
-* Implemented models:
+Example demand request:
 
-  * Random Forest
-  * ARIMA
-  * LSTM
+```json
+{
+  "month": 6,
+  "unit_price": 120.5,
+  "sub_category": "Chairs"
+}
+```
 
-* Evaluation metrics:
+## Deploy Backend On Render
 
-  * MAE (Mean Absolute Error)
-  * RMSE (Root Mean Squared Error)
+1. Push the repository to GitHub.
+2. Create a new Render Web Service from the repo.
+3. Render can read `render.yaml`, or use:
+   - Root directory: `backend`
+   - Build command: `pip install -r requirements.txt`
+   - Start command: `bash render-start.sh`
+4. Set `ALLOWED_ORIGINS` to your Vercel frontend URL.
 
-👉 **Output:** Forecasted Demand
+## Deploy Frontend On Vercel
 
----
+1. Import the same repository into Vercel.
+2. Set the root directory to `frontend`.
+3. Framework preset: `Vite`.
+4. Add env var:
+   - `VITE_API_BASE_URL=https://your-render-backend.onrender.com`
 
-### 3. Inventory Optimization
+## Notes
 
-* Calculated:
-
-  * Economic Order Quantity (EOQ)
-  * Safety Stock
-  * Reorder Point
-
-👉 **Goal:** Minimize cost while maintaining availability
-👉 **Output:** Optimal Inventory Levels
-
----
-
-### 4. Performance Evaluation
-
-* Compared actual vs predicted demand
-* Evaluated cost efficiency
-* Analyzed inventory turnover
-
-👉 **Output:** Actionable business insights
-
----
-
-### 5. Visualization & Deployment
-
-* Built dashboards for:
-
-  * Demand forecasting
-  * Inventory status
-  * Alerts & insights
-
-* Tools used:
-
-  * Streamlit
-  * Power BI
-
-👉 **Output:** Decision Support System
-
----
-
-## 📈 Results & Benefits
-
-* Improved demand prediction accuracy
-* Reduced inventory costs
-* Better stock availability
-* Faster and smarter decision-making
-* Scalable across industries
-
----
-
-## 🌍 Real-World Applications
-
-* Retail & E-commerce
-* Manufacturing
-* Warehousing & Logistics
-* Supply Chain Management
-
----
-
-## 🧑‍💻 Tech Stack
-
-* Python
-* Pandas, NumPy
-* Scikit-learn
-* Statsmodels (ARIMA)
-* TensorFlow / Keras (LSTM)
-* Streamlit / Power BI
-
----
-
-## 🧠 Key Learning
-
-This project demonstrates how combining **Machine Learning with business logic** can effectively solve real-world problems like demand uncertainty and inefficient inventory management.
-
----
-
-## Deployment Link
-https://demand-and-forecasting-ui-d76e.vercel.app/
-
-## 📌 Future Improvements
-
-* Real-time data integration
-* Advanced deep learning models
-* Cloud deployment (AWS / Azure)
-* Automated alert system
-
----
-
-## 👤 Author
-
-**Vishal Raj**
-
-
+- The original repository mixed Streamlit and static frontend code in one flat folder.
+- This version uses one consistent architecture that is easier to maintain and deploy.
+- `backend/models/*.pkl` is ignored because the backend can regenerate them.
