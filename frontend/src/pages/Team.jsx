@@ -102,7 +102,7 @@ export default function Team() {
       <section className="section" style={{ paddingTop: 0 }}>
         <div style={{ background: "var(--panel)", border: "1px solid var(--line)", borderRadius: 28, padding: 40, backdropFilter: "blur(18px)" }}>
           <div className="section__badge" style={{ marginBottom: 16 }}>🎓 About the Project</div>
-          <h2 style={{ fontSize: "1.6rem", fontWeight: 800, marginBottom: 16, letterSpacing: "-0.02em" }}>Final Year ML Project</h2>
+          <h2 style={{ fontSize: "1.6rem", fontWeight: 800, marginBottom: 16, letterSpacing: "-0.02em" }}>Second Year ML Project</h2>
           <p style={{ color: "var(--muted)", lineHeight: 1.8, maxWidth: 680, fontSize: "0.95rem" }}>
             ForecastIQ was developed as a capstone project to demonstrate practical applications of machine learning 
             in supply chain management. Using the Sample Superstore dataset (9,994 transactions), we trained a 
