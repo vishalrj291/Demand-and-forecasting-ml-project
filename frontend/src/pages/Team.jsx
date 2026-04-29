@@ -1,8 +1,8 @@
 const TEAM = [
   {
     name: "Vishal Raj",
-    role: "Lead ML Engineer",
-    skills: "Model Architecture · Backend API · Data Pipeline",
+    role: "Full Stack Developer ",
+    skills: "React Frontend · UI/UX · API Integration",
     emoji: "🧠",
     gradient: "linear-gradient(135deg, #38bdf8, #4ade80)",
     tag: "Team Lead",
@@ -19,20 +19,20 @@ const TEAM = [
   },
   {
     name: "Monty Gaurav",
-    role: "Full-Stack Developer",
-    skills: "React Frontend · UI/UX · API Integration",
+    role: "ML Research & Testing",
+    skills: "Model Validation · Inventory Logic · Documentation",
     emoji: "⚙️",
     gradient: "linear-gradient(135deg, #fb923c, #f59e0b)",
-    tag: "Frontend Dev",
+    tag: "Research",
     initials: "MG",
   },
   {
     name: "Dhruv",
-    role: "ML Research & Testing",
-    skills: "Model Validation · Inventory Logic · Documentation",
+    role: "Lead ML Engineer ",
+    skills: "Model Architecture · Backend API · Data Pipeline",
     emoji: "🔬",
     gradient: "linear-gradient(135deg, #4ade80, #22d3ee)",
-    tag: "Research",
+    tag: "ML Engineer",
     initials: "DH",
   },
 ];
