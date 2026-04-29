@@ -21,10 +21,10 @@ ForecastIQ combines ML models with classical inventory formulas to deliver:
 
 | Name | Role |
 |------|------|
-| Vishal Raj | Lead ML Engineer — Model Architecture, Backend API, Data Pipeline |
+| Vishal Raj | Full-Stack Developer — React Frontend, UI/UX, API Integration |
 | Divyanshi | Data Scientist — Feature Engineering, EDA, Model Evaluation |
-| Monty Gaurav | Full-Stack Developer — React Frontend, UI/UX, API Integration |
-| Dhruv | ML Research & Testing — Model Validation, Inventory Logic, Documentation |
+| Monty Gaurav | ML Research & Testing — Model Validation, Inventory Logic, Documentation |
+| Dhruv |Lead ML Engineer — Model Architecture, Backend API, Data Pipeline |
 
 ---
 
