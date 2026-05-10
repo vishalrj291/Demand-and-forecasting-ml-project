@@ -10,6 +10,7 @@
 
 ForecastIQ combines ML models with classical inventory formulas to deliver:
 
+
 - **Demand Forecasting** — Predicts monthly product demand using month, unit price, and sub-category
 - **Inventory Optimization** — Calculates Economic Order Quantity (EOQ) and Reorder Point (ROP)
 - **Stockout Risk** — Classifies high/low risk of running out of stock given current inventory vs demand
